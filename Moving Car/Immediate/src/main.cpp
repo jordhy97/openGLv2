@@ -18,7 +18,7 @@ main(int argc, char *argv[])
     glutCreateWindow("Moving Car");
 
     glutDisplayFunc(Display);
-    glutReshapeFunc(Reshape);
+    //glutReshapeFunc(Reshape);
     glutKeyboardFunc(Keyboard);
 
     glutMainLoop();
@@ -29,12 +29,67 @@ void Display(void)
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3ub(255,0,0);
-    glBegin(GL_TRIANGLES);
-      glVertex2f(0,0);
-      glVertex2f(800,800);
-      glVertex2f(160,360);
+    // exhaust
+    glBegin(GL_POLYGON);              
+        glColor3f(0.566f, 0.566f, 0.566f);
+        glVertex2f(-0.7f, -0.1f);    
+        glVertex2f(-0.7f, -0.2f);
+        glVertex2f(-0.6f, -0.2f);
+        glVertex2f(-0.6f, -0.1f);
     glEnd();
+
+    // body
+    glBegin(GL_POLYGON);              
+        glColor3f(1.0f, 0.0f, 0.0f); 
+        glVertex2f(-0.6f, 0.15f);    
+        glVertex2f(-0.6f, -0.25f);
+        glVertex2f(0.75f, -0.25f);
+        glVertex2f(0.75f, 0.15f);
+    glEnd();
+
+    // upper body
+    glBegin(GL_POLYGON);              
+      glColor3f(1.0f, 0.0f, 0.0f); 
+      glVertex2f(-0.45f, 0.15f);    
+      glVertex2f(0.5f, 0.15f);
+      glVertex2f(0.35f, 0.4f);
+      glVertex2f(-0.3f, 0.4f);
+    glEnd();
+
+    // back window
+    glBegin(GL_POLYGON);              
+      glColor3f(0.8f, 0.8f, 0.8f); 
+      glVertex2f(-0.365f, 0.15f);    
+      glVertex2f(0.0f, 0.15f);
+      glVertex2f(0.0f, 0.35f);
+      glVertex2f(-0.25f, 0.35f);
+    glEnd();
+
+    // front window
+    glBegin(GL_POLYGON);              
+      glColor3f(0.8f, 0.8f, 0.8f); 
+      glVertex2f(0.075f, 0.15f);    
+      glVertex2f(0.415f, 0.15f);
+      glVertex2f(0.3f, 0.35f);
+      glVertex2f(0.075f, 0.35f);
+    glEnd();
+
+    // back door
+    glBegin(GL_POLYGON);              
+      glColor3f(0.85f, 0.0f, 0.0f); 
+      glVertex2f(-0.365f, 0.15f);    
+      glVertex2f(-0.365f, -0.1f);
+      glVertex2f(0.0f, -0.1f);
+      glVertex2f(0.0f, 0.15f);
+    glEnd();
+
+    glBegin(GL_POLYGON);              
+      glColor3f(0.85f, 0.0f, 0.0f); 
+      glVertex2f(0.075f, 0.15f);    
+      glVertex2f(0.075f, -0.1f);
+      glVertex2f(0.415f, -0.1f);
+      glVertex2f(0.415f, 0.15f);
+    glEnd();   
 
     glFinish();
 }

@@ -9,11 +9,11 @@ using namespace std;
 GLint WINDOW_WIDTH = 800;
 GLint WINDOW_HEIGHT = 800;
 const float PI = 3.14159265;
-float angle = 0;
+const int FPS = 20;
 
-void Display(void);
-void Reshape(GLint w, GLint h);
-void Keyboard(unsigned char key, int x, int y);
+void display(void);
+void keyboard(unsigned char key, int x, int y);
+void timer(int);
 
 int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
@@ -21,15 +21,14 @@ int main(int argc, char *argv[]) {
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutCreateWindow("Moving Car");
 
-    glutDisplayFunc(Display);
-    //glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Keyboard);
-
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutTimerFunc(1000.0/FPS, timer, 0);
     glutMainLoop();
     return 0;
 }
 
-void Display(void) {
+void display(void) {
 	  glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -97,69 +96,102 @@ void Display(void) {
 
 
     // wheels
+    int num_segments = 360;
+
+    // back wheel
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(-0.365f, -0.25f, 0.0f);
     glRotatef(glutGet(GLUT_ELAPSED_TIME), 0.0f, 0.0f, 1.0f);
     glBegin(GL_POLYGON);
-      glColor3f(0.2, 0.2f, 0.2f);
-      glVertex2f(0.0f, 0.0f);
-      float arg = 0;
-      float inc = 360.0 / 16;
-      for (int i = 0; i < 18; i++) {
-        if (i % 2 == 0) {
-          glColor3f(0.0f, 0.0f, 0.0f);
-        } else {
-          glColor3f(0.2, 0.2f, 0.2f);
+      glColor3f(0.0f, 0.0f, 0.0f);
+      for (int i = 0; i < num_segments; i++) {
+        float theta = 2.0f * PI * i / float(num_segments);
+        float x = 0.13f * cos(theta);
+        float y = 0.13f * sin(theta);
+
+        glVertex2f(x, y);
+      }
+    glEnd();
+
+    for (int i = 0; i < 6; i++) {
+      glBegin(GL_POLYGON);
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glVertex2f(0.0f, 0.0f);
+        for (int j = i * 60 + 8; j <= i * 60 + 52; j++) {
+          float theta = 2.0f * PI * j / float(num_segments);
+          float x = 0.09f * cos(theta);
+          float y = 0.09f * sin(theta);
+          glVertex2f(x, y);
         }
-        glVertex2f(0.13f * cos(arg * PI / 180), 0.13f * sin(arg * PI / 180));
-        arg += inc;
+      glEnd();
+    }
+
+    glBegin(GL_POLYGON);
+      glColor3f(0.0f, 0.0f, 0.0f);
+      for (int i = 0; i < num_segments; i++) {
+        float theta = 2.0f * PI * i / float(num_segments);
+        float x = 0.025f * cos(theta);
+        float y = 0.025f * sin(theta);
+
+        glVertex2f(x, y);
       }
     glEnd();
     glPopMatrix();
 
+    // front wheel
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(0.415f, -0.25f, 0.0f);
     glRotatef(glutGet(GLUT_ELAPSED_TIME), 0.0f, 0.0f, 1.0f);
-    glBegin(GL_TRIANGLE_FAN);
-      glColor3f(0.2, 0.2f, 0.2f);
-      glVertex2f(0.0f, 0.0f);
-      arg = 0;
-      inc = 360.0 / 16;
-      for (int i = 0; i < 18; i++) {
-        if (i % 2 == 0) {
-          glColor3f(0.0f, 0.0f, 0.0f);
-        } else {
-          glColor3f(0.2, 0.2f, 0.2f);
+    glBegin(GL_POLYGON);
+      glColor3f(0.0f, 0.0f, 0.0f);
+      for (int i = 0; i < num_segments; i++) {
+        float theta = 2.0f * PI * i / float(num_segments);
+        float x = 0.13f * cos(theta);
+        float y = 0.13f * sin(theta);
+
+        glVertex2f(x, y);
+      }
+    glEnd();
+
+    for (int i = 0; i < 6; i++) {
+      glBegin(GL_POLYGON);
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glVertex2f(0.0f, 0.0f);
+        for (int j = i * 60 + 8; j <= i * 60 + 52; j++) {
+          float theta = 2.0f * PI * j / float(num_segments);
+          float x = 0.09f * cos(theta);
+          float y = 0.09f * sin(theta);
+          glVertex2f(x, y);
         }
-        glVertex2f(0.13f * cos(arg * PI / 180), 0.13f * sin(arg * PI / 180));
-        arg += inc;
+      glEnd();
+    }
+
+    glBegin(GL_POLYGON);
+      glColor3f(0.0f, 0.0f, 0.0f);
+      for (int i = 0; i < num_segments; i++) {
+        float theta = 2.0f * PI * i / float(num_segments);
+        float x = 0.025f * cos(theta);
+        float y = 0.025f * sin(theta);
+
+        glVertex2f(x, y);
       }
     glEnd();
     glPopMatrix();
 
-
     glFinish();
-    glutPostRedisplay();
 }
 
-void Reshape(GLint w, GLint h) {
-    WINDOW_WIDTH = w;
-    WINDOW_HEIGHT = h;
-    glViewport(0, 0, w, h);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0, w, 0, h, -1.0, 1.0);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-
-void Keyboard(unsigned char key, int x, int y) {
+void keyboard(unsigned char key, int x, int y) {
 	#define ESCAPE '\033'
 
     if( key == ESCAPE )
         exit(0);
+}
+
+void timer(int) {
+    /* update animation */
+    glutPostRedisplay();
+    glutTimerFunc(1000.0/FPS, timer, 0);
 }

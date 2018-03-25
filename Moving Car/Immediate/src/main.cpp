@@ -15,8 +15,7 @@ void Display(void);
 void Reshape(GLint w, GLint h);
 void Keyboard(unsigned char key, int x, int y);
 
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB);
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -27,10 +26,10 @@ main(int argc, char *argv[])
     glutKeyboardFunc(Keyboard);
 
     glutMainLoop();
+    return 0;
 }
 
-void Display(void)
-{
+void Display(void) {
 	  glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -96,17 +95,23 @@ void Display(void)
       glVertex2f(0.415f, 0.15f);
     glEnd();
 
+
+    // wheels
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(-0.365f, -0.25f, 0.0f);
     glRotatef(glutGet(GLUT_ELAPSED_TIME), 0.0f, 0.0f, 1.0f);
     glBegin(GL_POLYGON);
-      glColor3f(0.0f, 0.0f, 0.0f);
+      glColor3f(0.2, 0.2f, 0.2f);
       glVertex2f(0.0f, 0.0f);
       float arg = 0;
       float inc = 360.0 / 16;
       for (int i = 0; i < 18; i++) {
-        glTranslatef(-0.365f, -0.25f, 0.0f);
+        if (i % 2 == 0) {
+          glColor3f(0.0f, 0.0f, 0.0f);
+        } else {
+          glColor3f(0.2, 0.2f, 0.2f);
+        }
         glVertex2f(0.13f * cos(arg * PI / 180), 0.13f * sin(arg * PI / 180));
         arg += inc;
       }
@@ -117,16 +122,20 @@ void Display(void)
     glPushMatrix();
     glTranslatef(0.415f, -0.25f, 0.0f);
     glRotatef(glutGet(GLUT_ELAPSED_TIME), 0.0f, 0.0f, 1.0f);
-    glBegin(GL_POLYGON);
-    glColor3f(0.0f, 0.0f, 0.0f);
-    glVertex2f(0.0f, 0.0f);
-    arg = 0;
-    inc = 360.0 / 16;
-    for (int i = 0; i < 18; i++) {
-        glTranslatef(-0.365f, -0.25f, 0.0f);
+    glBegin(GL_TRIANGLE_FAN);
+      glColor3f(0.2, 0.2f, 0.2f);
+      glVertex2f(0.0f, 0.0f);
+      arg = 0;
+      inc = 360.0 / 16;
+      for (int i = 0; i < 18; i++) {
+        if (i % 2 == 0) {
+          glColor3f(0.0f, 0.0f, 0.0f);
+        } else {
+          glColor3f(0.2, 0.2f, 0.2f);
+        }
         glVertex2f(0.13f * cos(arg * PI / 180), 0.13f * sin(arg * PI / 180));
         arg += inc;
-    }
+      }
     glEnd();
     glPopMatrix();
 
@@ -135,8 +144,7 @@ void Display(void)
     glutPostRedisplay();
 }
 
-void Reshape(GLint w, GLint h)
-{
+void Reshape(GLint w, GLint h) {
     WINDOW_WIDTH = w;
     WINDOW_HEIGHT = h;
     glViewport(0, 0, w, h);
@@ -149,8 +157,7 @@ void Reshape(GLint w, GLint h)
     glLoadIdentity();
 }
 
-void Keyboard(unsigned char key, int x, int y)
-{
+void Keyboard(unsigned char key, int x, int y) {
 	#define ESCAPE '\033'
 
     if( key == ESCAPE )

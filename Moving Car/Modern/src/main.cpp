@@ -35,7 +35,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-  GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hello Triangle", NULL, NULL);
+  GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Moving Car", NULL, NULL);
 	if (window == NULL) {
 		cerr << "Failed to create GLFW window" << endl;
 		glfwTerminate();
@@ -132,9 +132,9 @@ int main() {
 		{-0.365f, -0.25f}, {0.415f, -0.25f}
 	};
 
-	CreatePolygon(car_vertices[7], 16, 0.13f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	CreatePolygon(car_vertices[8], 16, 0.13f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-
+	for (int i = 7; i < 9; i++) {
+		CreatePolygon(car_vertices[i], 16, 0.13f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	}
 
 	// Create VAO
 	GLuint vertex_array[9];
@@ -202,7 +202,7 @@ int main() {
 		// use shader program
     glUseProgram(car_body_shader_program);
 
-		// load vertex atrributes from VAO
+		// Draw car body
     for (int i = 0; i < 7; i++) {
     	// Bind VAO
 	    glBindVertexArray(vertex_array[i]);
@@ -217,7 +217,7 @@ int main() {
 		glUseProgram(wheel_shader_program);
 
 
-		// load vertex atrributes from VAO
+		// Draw wheels
 		for (int i = 7; i < 9; i++) {
 			mat4 trans;
 			trans = translate(trans, glm::vec3(wheel_center[i - 7][0], wheel_center[i - 7][1], 0.0f));
@@ -260,18 +260,24 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
 void CreatePolygon(GLfloat* polygon_vertices_buffer, int n, GLfloat radius, GLfloat center_x, GLfloat center_y, GLfloat r, GLfloat g, GLfloat b) {
 		polygon_vertices_buffer[0] = center_x;
 		polygon_vertices_buffer[1] = center_y;
-		polygon_vertices_buffer[2] = r;
-		polygon_vertices_buffer[3] = g;
-		polygon_vertices_buffer[4] = b;
+		polygon_vertices_buffer[2] = r + 0.2f;
+		polygon_vertices_buffer[3] = g + 0.2f;
+		polygon_vertices_buffer[4] = b + 0.2f;
 
 		float arg = 0;
 		float inc = 360.0 / n;
 		for (int i = 5; i < 5 * (n + 2); i+= 5) {
 				polygon_vertices_buffer[i] = center_x + radius * cos(arg * PI / 180);
 				polygon_vertices_buffer[i + 1] = center_y + radius * sin(arg * PI / 180);
-				polygon_vertices_buffer[i + 2] = r;
-				polygon_vertices_buffer[i + 3] = g;
-				polygon_vertices_buffer[i + 4] = b;
+				if (i % 2 == 0) {
+					polygon_vertices_buffer[i + 2] = r;
+					polygon_vertices_buffer[i + 3] = g;
+					polygon_vertices_buffer[i + 4] = b;
+				} else {
+					polygon_vertices_buffer[i + 2] = r + 0.2f;
+					polygon_vertices_buffer[i + 3] = g + 0.2f;
+					polygon_vertices_buffer[i + 4] = b + 0.2f;
+				}
 				arg += inc;
 		}
 }

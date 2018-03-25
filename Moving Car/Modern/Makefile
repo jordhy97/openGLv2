@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -c -Wall -g -std=c++11
-LDFLAGS = -g -lglfw -lGLEW -lGL
+LDFLAGS = -g -lglfw -lGLEW -lGL -lm
 
 SOURCES = $(wildcard ./src/*.cpp ./src/*/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)

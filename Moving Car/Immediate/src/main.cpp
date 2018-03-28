@@ -116,7 +116,7 @@ void display(void) {
 
     for (int i = 0; i < 6; i++) {
       glBegin(GL_POLYGON);
-        glColor3f(1.0f, 1.0f, 1.0f);
+        glColor3f(0.75f, 0.75f, 0.75f);
         glVertex2f(0.0f, 0.0f);
         for (int j = i * 60 + 8; j <= i * 60 + 52; j++) {
           float theta = 2.0f * PI * j / float(num_segments);
@@ -157,7 +157,7 @@ void display(void) {
 
     for (int i = 0; i < 6; i++) {
       glBegin(GL_POLYGON);
-        glColor3f(1.0f, 1.0f, 1.0f);
+        glColor3f(0.75f, 0.75f, 0.75f);
         glVertex2f(0.0f, 0.0f);
         for (int j = i * 60 + 8; j <= i * 60 + 52; j++) {
           float theta = 2.0f * PI * j / float(num_segments);
@@ -185,9 +185,8 @@ void display(void) {
 
 void keyboard(unsigned char key, int x, int y) {
 	#define ESCAPE '\033'
-
-    if( key == ESCAPE )
-        exit(0);
+  if( key == ESCAPE )
+    exit(0);
 }
 
 void timer(int) {

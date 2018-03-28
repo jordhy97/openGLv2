@@ -10,7 +10,6 @@
 using namespace std;
 using namespace glm;
 
-
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 800;
 const char* CAR_BODY_VERTEX_SHADER_FILE_PATH = "shaders/car_body_vertex_shader.vs";
@@ -19,7 +18,6 @@ const char* FRAGMENT_SHADER_FILE_PATH = "shaders/fragment_shader.fs";
 const float PI = 3.14159265;
 
 void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
-void CreatePolygon(GLfloat* polygon_vertices_buffer, int n, GLfloat radius, GLfloat center_x, GLfloat center_y, GLfloat r, GLfloat g, GLfloat b);
 
 int main() {
 	// Initialize GLFW
@@ -65,12 +63,8 @@ int main() {
 	GLuint car_body_shader_program = LoadShaders(CAR_BODY_VERTEX_SHADER_FILE_PATH, FRAGMENT_SHADER_FILE_PATH);
 	GLuint wheel_shader_program = LoadShaders(WHEEL_VERTEX_SHADER_FILE_PATH, FRAGMENT_SHADER_FILE_PATH);
 
-	// Create triangle points and set their colors
-	static const GLint num_of_vertices[] = {
-		4, 4, 4, 4, 4, 4, 4, 18, 18
-	};
-
-	GLfloat car_vertices[9][5 * 18] = {
+	// Init car body
+	static const GLfloat car_body_vertices[7][20] = {
 		// exhaust
 		{
 			-0.7f, -0.1f, 0.566f, 0.566f, 0.566f,
@@ -128,112 +122,157 @@ int main() {
 		}
 	};
 
+	// Create VAO
+	GLuint car_body_vertex_array;
+	glGenVertexArrays(1, &car_body_vertex_array);
+
+  // Create VBO
+  GLuint car_body_vertex_buffer;
+  glGenBuffers(1, &car_body_vertex_buffer);
+
+  // Bind VAO
+	glBindVertexArray(car_body_vertex_array);
+
+	// Bind VBO
+	glBindBuffer(GL_ARRAY_BUFFER, car_body_vertex_buffer);
+
+	// Give our vertices to OpenGL
+	glBufferData(GL_ARRAY_BUFFER, sizeof(car_body_vertices), car_body_vertices, GL_STATIC_DRAW);
+
+	// Set vertex attribute
+	GLint posAttrib = glGetAttribLocation(car_body_shader_program, "position");
+	glEnableVertexAttribArray(posAttrib);
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
+	                      5 * sizeof(float), 0);
+
+	GLint colAttrib = glGetAttribLocation(car_body_shader_program, "in_color");
+	glEnableVertexAttribArray(colAttrib);
+	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
+		                    5*  sizeof(float), (void*)(2 * sizeof(float)));
+
+	// unbind VAO
+	glBindVertexArray(0);
+
+	// Init wheel
 	static const GLfloat wheel_center[2][2] = {
 		{-0.365f, -0.25f}, {0.415f, -0.25f}
 	};
 
-	for (int i = 7; i < 9; i++) {
-		CreatePolygon(car_vertices[i], 16, 0.13f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	GLfloat wheel_vertices[5000];
+	static const int wheel_vertices_count[] = {
+		362, 46, 46, 46, 46, 46, 46, 362
+	};
+	int num_segments = 360;
+	int idx = 0;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+
+	for (int i = 0; i <= num_segments; i++) {
+		float theta = 2.0f * PI * i / float(num_segments);
+		wheel_vertices[idx++] = 0.13f * cos(theta);
+		wheel_vertices[idx++] = 0.13f * sin(theta);
+		wheel_vertices[idx++] = 0.0f;
+		wheel_vertices[idx++] = 0.0f;
+		wheel_vertices[idx++] = 0.0f;
+	}
+
+	for (int i = 1; i <= 6; i++) {
+		wheel_vertices[idx++] = 0.0f;
+		wheel_vertices[idx++] = 0.0f;
+		wheel_vertices[idx++] = 0.75f;
+		wheel_vertices[idx++] = 0.75f;
+		wheel_vertices[idx++] = 0.75f;
+		for (int j = (i - 1) * 60 + 8; j <= (i - 1) * 60 + 52; j++) {
+			float theta = 2.0f * PI * j / float(num_segments);
+			wheel_vertices[idx++] = 0.09f * cos(theta);
+			wheel_vertices[idx++] = 0.09f * sin(theta);
+			wheel_vertices[idx++] = 0.75f;
+			wheel_vertices[idx++] = 0.75f;
+			wheel_vertices[idx++] = 0.75f;
+		}
+	}
+
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+	wheel_vertices[idx++] = 0.0f;
+
+	for (int i = 0; i <= num_segments; i++) {
+		float theta = 2.0f * PI * i / float(num_segments);
+		wheel_vertices[idx++] = 0.025f * cos(theta);
+		wheel_vertices[idx++] = 0.025f * sin(theta);
+		wheel_vertices[idx++] = 0.0f;
+		wheel_vertices[idx++] = 0.0f;
+		wheel_vertices[idx++] = 0.0f;
 	}
 
 	// Create VAO
-	GLuint vertex_array[9];
-	glGenVertexArrays(9, vertex_array);
+	GLuint wheel_vertex_array;
+	glGenVertexArrays(1, &wheel_vertex_array);
 
-  // Create VBO
-  GLuint vertex_buffer[9];
-  glGenBuffers(9, vertex_buffer);
+	// Create VBO
+	GLuint wheel_vertex_buffer;
+	glGenBuffers(1, &wheel_vertex_buffer);
 
-  for (int i = 0; i < 7; i++) {
-		// Bind VAO
-		glBindVertexArray(vertex_array[i]);
+	// Bind VAO
+	glBindVertexArray(wheel_vertex_array);
 
-		// Bind VBO
-		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer[i]);
+	// Bind VBO
+	glBindBuffer(GL_ARRAY_BUFFER, wheel_vertex_buffer);
 
-		// Give our vertices to OpenGL
-		glBufferData(GL_ARRAY_BUFFER, num_of_vertices[i] * 5 * sizeof(float), car_vertices[i], GL_STATIC_DRAW);
+	// Give our vertices to OpenGL
+	glBufferData(GL_ARRAY_BUFFER, sizeof(wheel_vertices), wheel_vertices, GL_STATIC_DRAW);
 
-		// Set vertex attribute
-		GLint posAttrib = glGetAttribLocation(car_body_shader_program, "position");
-		glEnableVertexAttribArray(posAttrib);
-		glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
-		                       5*sizeof(float), 0);
+	// Set vertex attribute
+	posAttrib = glGetAttribLocation(wheel_shader_program, "position");
+	glEnableVertexAttribArray(posAttrib);
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
+												5 * sizeof(float), 0);
 
-		GLint colAttrib = glGetAttribLocation(car_body_shader_program, "in_color");
-		glEnableVertexAttribArray(colAttrib);
-		glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
-		                       5*sizeof(float), (void*)(2*sizeof(float)));
+	colAttrib = glGetAttribLocation(wheel_shader_program, "in_color");
+	glEnableVertexAttribArray(colAttrib);
+	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
+												5 * sizeof(float), (void*)(2 * sizeof(float)));
 
-		// unbind VAO
-	  glBindVertexArray(0);
-  }
-
-	for (int i = 7; i < 9; i++) {
-		// Bind VAO
-		glBindVertexArray(vertex_array[i]);
-
-		// Bind VBO
-		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer[i]);
-
-		// Give our vertices to OpenGL
-		glBufferData(GL_ARRAY_BUFFER, num_of_vertices[i] * 5 * sizeof(float), car_vertices[i], GL_STATIC_DRAW);
-
-		// Set vertex attribute
-		GLint posAttrib = glGetAttribLocation(wheel_shader_program, "position");
-		glEnableVertexAttribArray(posAttrib);
-		glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
-													 5*sizeof(float), 0);
-
-		GLint colAttrib = glGetAttribLocation(wheel_shader_program, "in_color");
-		glEnableVertexAttribArray(colAttrib);
-		glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
-													 5*sizeof(float), (void*)(2*sizeof(float)));
-
-		// unbind VAO
-		glBindVertexArray(0);
-	}
+	// unbind VAO
+	glBindVertexArray(0);
 
 	// Main loop
 	do {
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// use shader program
-    glUseProgram(car_body_shader_program);
-
 		// Draw car body
+		glUseProgram(car_body_shader_program);
+		glBindVertexArray(car_body_vertex_array);
+		int offset = 0;
     for (int i = 0; i < 7; i++) {
-    	// Bind VAO
-	    glBindVertexArray(vertex_array[i]);
-
-			// Draw
-			glDrawArrays(GL_TRIANGLE_FAN, 0, num_of_vertices[i]); // 3 indices starting at 0 -> 1 triangle
-
-			// unbind VAO
-			glBindVertexArray(0);
+			int vertices_count = sizeof(car_body_vertices[i]) / (5 * sizeof(float));
+			glDrawArrays(GL_TRIANGLE_FAN, offset, vertices_count);
+			offset += vertices_count;
     }
-
-		glUseProgram(wheel_shader_program);
-
+		glBindVertexArray(0);
 
 		// Draw wheels
-		for (int i = 7; i < 9; i++) {
+		glUseProgram(wheel_shader_program);
+		glBindVertexArray(wheel_vertex_array);
+		for (int i = 0; i < 2; i++) {
 			mat4 trans;
-			trans = translate(trans, glm::vec3(wheel_center[i - 7][0], wheel_center[i - 7][1], 0.0f));
+			trans = translate(trans, vec3(wheel_center[i][0], wheel_center[i][1], 0.0f));
 			trans = rotate(trans, (float)-glfwGetTime(), vec3(0.0f, 0.0f, 1.0f));
 			unsigned int transformLoc = glGetUniformLocation(wheel_shader_program, "transform");
 			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, value_ptr(trans));
-
-			// Bind VAO
-			glBindVertexArray(vertex_array[i]);
-
-			// Draw
-			glDrawArrays(GL_TRIANGLE_FAN, 0, num_of_vertices[i]); // 3 indices starting at 0 -> 1 triangle
-
-			// unbind VAO
-			glBindVertexArray(0);
+			offset = 0;
+			for (int i = 0; i < 8; i++) {
+				glDrawArrays(GL_TRIANGLE_FAN, offset, wheel_vertices_count[i]);
+				offset += wheel_vertices_count[i];
+			}
 		}
+		glBindVertexArray(0);
 
 		// Swap buffers
 		glfwSwapBuffers(window);
@@ -243,8 +282,10 @@ int main() {
 	} while( glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 
 	// Cleanup VBO, VAO, and shader program
-	glDeleteBuffers(9, vertex_buffer);
-	glDeleteVertexArrays(9, vertex_array);
+	glDeleteBuffers(1, &car_body_vertex_buffer);
+	glDeleteVertexArrays(1, &car_body_vertex_array);
+	glDeleteBuffers(1, &wheel_vertex_buffer);
+	glDeleteVertexArrays(1, &wheel_vertex_array);
 	glDeleteProgram(car_body_shader_program);
 	glDeleteProgram(wheel_shader_program);
 
@@ -255,29 +296,4 @@ int main() {
 
 void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
-}
-
-void CreatePolygon(GLfloat* polygon_vertices_buffer, int n, GLfloat radius, GLfloat center_x, GLfloat center_y, GLfloat r, GLfloat g, GLfloat b) {
-		polygon_vertices_buffer[0] = center_x;
-		polygon_vertices_buffer[1] = center_y;
-		polygon_vertices_buffer[2] = r + 0.2f;
-		polygon_vertices_buffer[3] = g + 0.2f;
-		polygon_vertices_buffer[4] = b + 0.2f;
-
-		float arg = 0;
-		float inc = 360.0 / n;
-		for (int i = 5; i < 5 * (n + 2); i+= 5) {
-				polygon_vertices_buffer[i] = center_x + radius * cos(arg * PI / 180);
-				polygon_vertices_buffer[i + 1] = center_y + radius * sin(arg * PI / 180);
-				if (i % 2 == 0) {
-					polygon_vertices_buffer[i + 2] = r;
-					polygon_vertices_buffer[i + 3] = g;
-					polygon_vertices_buffer[i + 4] = b;
-				} else {
-					polygon_vertices_buffer[i + 2] = r + 0.2f;
-					polygon_vertices_buffer[i + 3] = g + 0.2f;
-					polygon_vertices_buffer[i + 4] = b + 0.2f;
-				}
-				arg += inc;
-		}
 }

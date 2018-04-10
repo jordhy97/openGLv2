@@ -18,6 +18,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID1141
 Kd 0.6 0.6 0.6
@@ -37,6 +38,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID1212
 Kd 0.6 0.6 0.6
@@ -55,6 +57,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID1379
 Kd 0.694118 0.694118 0.694118
@@ -64,6 +67,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl JoinedMaterial_#10
 Kd 0 0 0
@@ -73,6 +77,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID1455
 Kd 0.6 0.6 0.6
@@ -101,6 +106,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID254
 Kd 0.6 0.6 0.6
@@ -119,6 +125,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID2689
 Kd 0.137255 0.137255 0.137255
@@ -128,6 +135,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID29
 Kd 1 0.266667 0
@@ -137,6 +145,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID3122
 Kd 0.6 0.6 0.6
@@ -145,6 +154,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID315
 Kd 0.6 0.6 0.6
@@ -184,6 +194,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID328
 Kd 0.6 0.6 0.6
@@ -203,6 +214,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl JoinedMaterial_#37
 Kd 1 1 1
@@ -212,6 +224,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID547
 Kd 0.0588235 0.0588235 0.0588235
@@ -221,6 +234,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID555
 Kd 0.603922 0 0
@@ -230,6 +244,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID560
 Kd 0.576471 0 0
@@ -239,6 +254,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID565
 Kd 0.0941176 0.0941176 0.0941176
@@ -247,6 +263,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID585
 Kd 0.6 0.6 0.6
@@ -274,6 +291,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID623
 Kd 0.0745098 0.0745098 0.0745098
@@ -283,6 +301,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID662
 Kd 0.0470588 0.0470588 0.0470588
@@ -292,6 +311,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID74
 Kd 0.6 0.6 0.6
@@ -310,6 +330,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID88
 Kd 0.6 0.6 0.6
@@ -321,16 +342,6 @@ Ns 10
 illum 2
 map_Kd model/Metal_Aluminum_Corrugated_0.jpg
 
-newmtl ID880
-Kd 0.6 0.6 0.6
-Ka 0.1 0.1 0.1
-Ks 0.4 0.4 0.4
-Ke 0 0 0
-d 1
-Ns 10
-illum 2
-map_Kd model/texture.png
-
 newmtl ID938
 Kd 0.356863 0.356863 0.356863
 Ka 0.1 0.1 0.1
@@ -338,6 +349,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID943
 Kd 0.556863 0.556863 0.556863
@@ -347,6 +359,7 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID969
 Kd 1 1 0.486275
@@ -355,6 +368,7 @@ Ks 0.4 0.4 0.4
 Ke 0 0 0
 Ns 10
 illum 2
+map_Kd model/white.png
 
 newmtl ID980
 Kd 0.584314 0 0
@@ -364,4 +378,4 @@ Ke 0 0 0
 d 1
 Ns 10
 illum 2
-
+map_Kd model/white.png

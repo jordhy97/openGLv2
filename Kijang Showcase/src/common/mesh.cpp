@@ -2,10 +2,11 @@
 #include <GL/glew.h>
 #include <iostream>
 // Constructor
-Mesh::Mesh(const vector<Vertex>& vertices, const vector<unsigned int>& indices, const vector<Texture>& textures) {
+Mesh::Mesh(const vector<Vertex>& vertices, const vector<unsigned int>& indices, const vector<Texture>& textures, const glm::vec3& diffuse_color) {
   vertices_ = vertices;
   indices_ = indices;
   textures_ = textures;
+  diffuse_color_ = diffuse_color;
 
   // Set the vertex buffers and its attribute pointers
   setupMesh();
@@ -37,14 +38,14 @@ void Mesh::render(Shader& shader) const {
     glBindTexture(GL_TEXTURE_2D, textures_[i].id);
   }
 
-  // set everything back to defaults once configured.
-  glActiveTexture(GL_TEXTURE0);
-
+  shader.setVec3("diffuse_color", diffuse_color_);
   // render mesh
   glBindVertexArray(VAO_);
   glDrawElements(GL_TRIANGLES, indices_.size(), GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
 
+  // set everything back to defaults once configured.
+  glActiveTexture(GL_TEXTURE0);
 }
 
 // Initializes all the buffer objects/arrays

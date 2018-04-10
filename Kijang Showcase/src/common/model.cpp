@@ -3,6 +3,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 #include <iostream>
 using namespace std;
 
@@ -52,6 +53,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
   vector<Vertex> vertices;
   vector<unsigned int> indices;
   vector<Texture> textures;
+  glm::vec3 diffuse_color;
 
   // process vertex positions, normals and texture coordinates
   for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
@@ -93,14 +95,17 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
   // process material
   if (mesh->mMaterialIndex >= 0) {
     aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+    aiColor3D color;
+    material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+    diffuse_color = glm::vec3(color.r, color.g, color.b);
+
     vector<Texture> diffuse_maps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
     textures.insert(textures.end(), diffuse_maps.begin(), diffuse_maps.end());
 
     vector<Texture> specular_maps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
     textures.insert(textures.end(), specular_maps.begin(), specular_maps.end());
   }
-
-  return Mesh(vertices, indices, textures);
+  return Mesh(vertices, indices, textures, diffuse_color);
 }
 
 // Checks all material textures of a given type and loads the textures if they're not loaded yet

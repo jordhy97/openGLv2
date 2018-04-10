@@ -22,7 +22,7 @@ struct Texture {
 class Mesh {
 public:
   // Constructor
-  Mesh(const vector<Vertex>& vertices, const vector<unsigned int>& indices, const vector<Texture>& textures);
+  Mesh(const vector<Vertex>& vertices, const vector<unsigned int>& indices, const vector<Texture>& textures, const glm::vec3& diffuse_color);
 
   // Render the mesh
   void render(Shader& shader) const;
@@ -35,6 +35,7 @@ private:
   vector<Vertex> vertices_;
   vector<unsigned int> indices_;
   vector<Texture> textures_;
+  glm::vec3 diffuse_color_;
   unsigned int VAO_;
 
   // Render data

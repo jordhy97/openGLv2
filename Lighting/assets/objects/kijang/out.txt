@@ -1,0 +1,464 @@
+Launching asset import ...           OK
+Validating postprocessing flags ...  OK
+Importing file ...                   OK 
+   import took approx. 0.20203 seconds
+
+Memory consumption: 6052804 B
+Nodes:              382
+Maximum depth       2
+Meshes:             381
+Animations:         0
+Textures (embed.):  0
+Materials:          34
+Cameras:            0
+Lights:             0
+Vertices:           87727
+Faces:              80578
+Bones:              0
+Animation Channels: 0
+Primitive Types:    linestriangles
+Average faces/mesh  211
+Average verts/mesh  230
+Minimum point      (-3.702210 -0.005884 -7.513120)
+Maximum point      (0.603135 1.666520 -5.481640)
+Center point       (-1.549537 0.830318 -6.497380)
+
+Named Materials:
+    'ID1000'
+    'JoinedMaterial_#34'
+    'ID1141'
+    'ID1196'
+    'ID1212'
+    'ID1379'
+    'JoinedMaterial_#10'
+    'ID1455'
+    'ID16'
+    'ID254'
+    'ID2689'
+    'ID29'
+    'ID315'
+    'ID3168'
+    'ID3221'
+    'ID328'
+    'ID37'
+    'JoinedMaterial_#37'
+    'ID547'
+    'ID555'
+    'ID560'
+    'ID565'
+    'ID585'
+    'ID598'
+    'ID614'
+    'ID623'
+    'ID662'
+    'ID74'
+    'ID88'
+    'ID880'
+    'ID938'
+    'ID943'
+    'ID969'
+    'ID980'
+
+Texture Refs:
+    'model/Stone_Brushed_Khaki.jpg'
+    'model/texture_0.png'
+    'model/__Metal_Corrogated_Shiny_1_6.jpg'
+    'model/SG_Autos_logo.jpg'
+    'model/__Metal_Corrogated_Shiny_1.jpg'
+    'model/logo.bmp'
+    'model/Metal_Corrogated_Shiny.jpg'
+    'model/Fencing_Diamond_Mesh2.png'
+    'model/Fencing_Diamond_Mesh2.png'
+    'model/texture_1.png'
+    'model/Metal_Corrogated_Shiny_1.jpg'
+    'model/__Translucent_Glass_Corrugated_1.jpg'
+    'model/__Translucent_Glass_Corrugated_1_2.jpg'
+    'model/Metal_Aluminum_Corrugated.jpg'
+    'model/Metal_Aluminum_Corrugated_0.jpg'
+    'model/texture.png'
+
+Node hierarchy:
+'model.obj', meshes: 0
+-- 'g group_0', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_0_ID3164', meshes: 1
+-- 'g group_0', meshes: 1
+-- 'g group_2_ID7', meshes: 1
+-- 'g group_2_ID15', meshes: 1
+-- 'g group_2_ID28', meshes: 1
+-- 'g group_2_ID36', meshes: 1
+-- 'g group_3', meshes: 1
+-- 'g group_3_ID59', meshes: 1
+-- 'g group_3_ID65', meshes: 1
+-- 'g group_5_ID73', meshes: 1
+-- 'g group_6_ID87', meshes: 1
+-- 'g group_6_ID100', meshes: 1
+-- 'g group_5_ID108', meshes: 1
+-- 'g group_6_ID117', meshes: 1
+-- 'g group_6_ID125', meshes: 1
+-- 'g group_2_ID133', meshes: 1
+-- 'g group_2_ID139', meshes: 1
+-- 'g group_2_ID147', meshes: 1
+-- 'g group_2_ID153', meshes: 1
+-- 'g group_3', meshes: 1
+-- 'g group_3_ID172', meshes: 1
+-- 'g group_3_ID178', meshes: 1
+-- 'g group_9', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_10_ID186', meshes: 1
+-- 'g group_11', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_11_ID306', meshes: 1
+-- 'g group_13_ID314', meshes: 1
+-- 'g group_13_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_14_ID314', meshes: 1
+-- 'g group_14_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_15_ID314', meshes: 1
+-- 'g group_15_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_16_ID314', meshes: 1
+-- 'g group_16_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_17_ID314', meshes: 1
+-- 'g group_17_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_18_ID314', meshes: 1
+-- 'g group_18_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_19_ID314', meshes: 1
+-- 'g group_19_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_20_ID314', meshes: 1
+-- 'g group_20_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_21_ID314', meshes: 1
+-- 'g group_21_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_22_ID314', meshes: 1
+-- 'g group_22_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_23_ID314', meshes: 1
+-- 'g group_23_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_24_ID314', meshes: 1
+-- 'g group_24_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_25_ID314', meshes: 1
+-- 'g group_25_ID327', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_26_ID554', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_26', meshes: 1
+-- 'g group_26_ID578', meshes: 1
+-- 'g group_27_ID546', meshes: 1
+-- 'g group_29_ID584', meshes: 1
+-- 'g group_29_ID597', meshes: 1
+-- 'g group_32_ID613', meshes: 1
+-- 'g group_33_ID622', meshes: 1
+-- 'g group_34_ID631', meshes: 1
+-- 'g Group_176_ID639', meshes: 1
+-- 'g Group_176_ID647', meshes: 1
+-- 'g group_35_ID654', meshes: 1
+-- 'g group_36_ID661', meshes: 1
+-- 'g group_37_ID670', meshes: 1
+-- 'g group_39_ID678', meshes: 1
+-- 'g group_40_ID685', meshes: 1
+-- 'g Group_175_ID693', meshes: 1
+-- 'g Group_175_ID701', meshes: 1
+-- 'g group_41_ID708', meshes: 1
+-- 'g group_41_ID714', meshes: 1
+-- 'g group_29_ID584', meshes: 1
+-- 'g group_29_ID597', meshes: 1
+-- 'g group_44_ID740', meshes: 1
+-- 'g group_45_ID747', meshes: 1
+-- 'g group_45_ID753', meshes: 1
+-- 'g group_46_ID760', meshes: 1
+-- 'g group_32_ID613', meshes: 1
+-- 'g group_33_ID622', meshes: 1
+-- 'g group_34_ID631', meshes: 1
+-- 'g Group_176_ID639', meshes: 1
+-- 'g Group_176_ID647', meshes: 1
+-- 'g group_49_ID654', meshes: 1
+-- 'g group_50_ID661', meshes: 1
+-- 'g group_51_ID670', meshes: 1
+-- 'g group_39_ID678', meshes: 1
+-- 'g group_40_ID685', meshes: 1
+-- 'g Group_175_ID693', meshes: 1
+-- 'g Group_175_ID701', meshes: 1
+-- 'g group_53_ID708', meshes: 1
+-- 'g group_53_ID714', meshes: 1
+-- 'g group_54_ID843', meshes: 1
+-- 'g group_55_ID850', meshes: 1
+-- 'g group_55_ID856', meshes: 1
+-- 'g group_55', meshes: 1
+-- 'g image_0_ID879', meshes: 1
+-- 'g image_1_ID879', meshes: 1
+-- 'g group_56_ID902', meshes: 1
+-- 'g group_57', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_57_ID937', meshes: 1
+-- 'g group_57', meshes: 1
+-- 'g group_58_ID961', meshes: 1
+-- 'g group_59_ID955', meshes: 1
+-- 'g group_60', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_60_ID984', meshes: 1
+-- 'g group_60_ID996', meshes: 1
+-- 'g group_60', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_61_ID1066', meshes: 1
+-- 'g group_62_ID1053', meshes: 1
+-- 'g group_63_ID1060', meshes: 1
+-- 'g group_64', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_64_ID1117', meshes: 1
+-- 'g group_64', meshes: 1
+-- 'g group_64_ID1135', meshes: 1
+-- 'g group_65_ID1074', meshes: 1
+-- 'g group_66_ID1081', meshes: 1
+-- 'g image_2_ID1140', meshes: 1
+-- 'g image_3_ID1140', meshes: 1
+-- 'g group_67_ID1170', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_67', meshes: 1
+-- 'g group_67_ID578', meshes: 1
+-- 'g group_68_ID1164', meshes: 1
+-- 'g group_71_ID1195', meshes: 1
+-- 'g group_72_ID1204', meshes: 1
+-- 'g group_73', meshes: 1
+-- 'g group_73_ID1232', meshes: 1
+-- 'g group_74_ID1241', meshes: 1
+-- 'g group_71_ID1249', meshes: 1
+-- 'g group_72_ID1256', meshes: 1
+-- 'g group_73', meshes: 1
+-- 'g group_73_ID1279', meshes: 1
+-- 'g group_74_ID1288', meshes: 1
+-- 'g group_76_ID1295', meshes: 1
+-- 'g group_77_ID1302', meshes: 1
+-- 'g Group_41_ID1324', meshes: 1
+-- 'g Group_41_ID1330', meshes: 1
+-- 'g group_79', meshes: 1
+-- 'g Group_41_ID1351', meshes: 1
+-- 'g Group_41_ID1330', meshes: 1
+-- 'g group_79', meshes: 1
+-- 'g group_80_ID1362', meshes: 1
+-- 'g group_81_ID1295', meshes: 1
+-- 'g group_84_ID1378', meshes: 1
+-- 'g group_84_ID1386', meshes: 1
+-- 'g group_84_ID1392', meshes: 1
+-- 'g group_84_ID1400', meshes: 1
+-- 'g group_84_ID1406', meshes: 1
+-- 'g group_84_ID1412', meshes: 1
+-- 'g group_84_ID1418', meshes: 1
+-- 'g group_84_ID1424', meshes: 1
+-- 'g group_84_ID1430', meshes: 1
+-- 'g group_84_ID1436', meshes: 1
+-- 'g group_84_ID1442', meshes: 1
+-- 'g group_84_ID1448', meshes: 1
+-- 'g group_84_ID1454', meshes: 1
+-- 'g group_84_ID1467', meshes: 1
+-- 'g group_84_ID1473', meshes: 1
+-- 'g group_84_ID1479', meshes: 1
+-- 'g group_84_ID1485', meshes: 1
+-- 'g group_84_ID1491', meshes: 1
+-- 'g group_85_ID1523', meshes: 1
+-- 'g group_85_ID1529', meshes: 1
+-- 'g group_85_ID1535', meshes: 1
+-- 'g group_85_ID1541', meshes: 1
+-- 'g group_85_ID1547', meshes: 1
+-- 'g group_85_ID1553', meshes: 1
+-- 'g group_85_ID1559', meshes: 1
+-- 'g group_85_ID1565', meshes: 1
+-- 'g group_85_ID1571', meshes: 1
+-- 'g group_85_ID1577', meshes: 1
+-- 'g group_85_ID1583', meshes: 1
+-- 'g group_85_ID1589', meshes: 1
+-- 'g group_85_ID1595', meshes: 1
+-- 'g group_85_ID1601', meshes: 1
+-- 'g group_85_ID1607', meshes: 1
+-- 'g group_85_ID1613', meshes: 1
+-- 'g group_85_ID1619', meshes: 1
+-- 'g group_85_ID1625', meshes: 1
+-- 'g group_85_ID1631', meshes: 1
+-- 'g group_85_ID1637', meshes: 1
+-- 'g group_85_ID1643', meshes: 1
+-- 'g group_85_ID1649', meshes: 1
+-- 'g group_84_ID1378', meshes: 1
+-- 'g group_84_ID1386', meshes: 1
+-- 'g group_84_ID1392', meshes: 1
+-- 'g group_84_ID1400', meshes: 1
+-- 'g group_84_ID1406', meshes: 1
+-- 'g group_84_ID1412', meshes: 1
+-- 'g group_84_ID1418', meshes: 1
+-- 'g group_84_ID1424', meshes: 1
+-- 'g group_84_ID1430', meshes: 1
+-- 'g group_84_ID1436', meshes: 1
+-- 'g group_84_ID1442', meshes: 1
+-- 'g group_84_ID1448', meshes: 1
+-- 'g group_84_ID1454', meshes: 1
+-- 'g group_84_ID1467', meshes: 1
+-- 'g group_84_ID1473', meshes: 1
+-- 'g group_84_ID1479', meshes: 1
+-- 'g group_84_ID1485', meshes: 1
+-- 'g group_84_ID1491', meshes: 1
+-- 'g group_85_ID1523', meshes: 1
+-- 'g group_85_ID1529', meshes: 1
+-- 'g group_85_ID1535', meshes: 1
+-- 'g group_85_ID1541', meshes: 1
+-- 'g group_85_ID1547', meshes: 1
+-- 'g group_85_ID1553', meshes: 1
+-- 'g group_85_ID1559', meshes: 1
+-- 'g group_85_ID1565', meshes: 1
+-- 'g group_85_ID1571', meshes: 1
+-- 'g group_85_ID1577', meshes: 1
+-- 'g group_85_ID1583', meshes: 1
+-- 'g group_85_ID1589', meshes: 1
+-- 'g group_85_ID1595', meshes: 1
+-- 'g group_85_ID1601', meshes: 1
+-- 'g group_85_ID1607', meshes: 1
+-- 'g group_85_ID1613', meshes: 1
+-- 'g group_85_ID1619', meshes: 1
+-- 'g group_85_ID1625', meshes: 1
+-- 'g group_85_ID1631', meshes: 1
+-- 'g group_85_ID1637', meshes: 1
+-- 'g group_85_ID1643', meshes: 1
+-- 'g group_85_ID1649', meshes: 1
+-- 'g group_84_ID1928', meshes: 1
+-- 'g group_84_ID1934', meshes: 1
+-- 'g group_84_ID1940', meshes: 1
+-- 'g group_84_ID1946', meshes: 1
+-- 'g group_84_ID1952', meshes: 1
+-- 'g group_84_ID1958', meshes: 1
+-- 'g group_84_ID1964', meshes: 1
+-- 'g group_84_ID1970', meshes: 1
+-- 'g group_84_ID1976', meshes: 1
+-- 'g group_84_ID1982', meshes: 1
+-- 'g group_84_ID1988', meshes: 1
+-- 'g group_84_ID1994', meshes: 1
+-- 'g group_84_ID2000', meshes: 1
+-- 'g group_84_ID2008', meshes: 1
+-- 'g group_84_ID2014', meshes: 1
+-- 'g group_84_ID2020', meshes: 1
+-- 'g group_84_ID2026', meshes: 1
+-- 'g group_84_ID2032', meshes: 1
+-- 'g group_85_ID2064', meshes: 1
+-- 'g group_85_ID2070', meshes: 1
+-- 'g group_85_ID2076', meshes: 1
+-- 'g group_85_ID2082', meshes: 1
+-- 'g group_85_ID2088', meshes: 1
+-- 'g group_85_ID2094', meshes: 1
+-- 'g group_85_ID2100', meshes: 1
+-- 'g group_85_ID2106', meshes: 1
+-- 'g group_85_ID2112', meshes: 1
+-- 'g group_85_ID2118', meshes: 1
+-- 'g group_85_ID2124', meshes: 1
+-- 'g group_85_ID2130', meshes: 1
+-- 'g group_85_ID2136', meshes: 1
+-- 'g group_85_ID2142', meshes: 1
+-- 'g group_85_ID2148', meshes: 1
+-- 'g group_85_ID2154', meshes: 1
+-- 'g group_85_ID2160', meshes: 1
+-- 'g group_85_ID2166', meshes: 1
+-- 'g group_85_ID2172', meshes: 1
+-- 'g group_85_ID2178', meshes: 1
+-- 'g group_85_ID2184', meshes: 1
+-- 'g group_85_ID2190', meshes: 1
+-- 'g group_84_ID1928', meshes: 1
+-- 'g group_84_ID1934', meshes: 1
+-- 'g group_84_ID1940', meshes: 1
+-- 'g group_84_ID1946', meshes: 1
+-- 'g group_84_ID1952', meshes: 1
+-- 'g group_84_ID1958', meshes: 1
+-- 'g group_84_ID1964', meshes: 1
+-- 'g group_84_ID1970', meshes: 1
+-- 'g group_84_ID1976', meshes: 1
+-- 'g group_84_ID1982', meshes: 1
+-- 'g group_84_ID1988', meshes: 1
+-- 'g group_84_ID1994', meshes: 1
+-- 'g group_84_ID2000', meshes: 1
+-- 'g group_84_ID2008', meshes: 1
+-- 'g group_84_ID2014', meshes: 1
+-- 'g group_84_ID2020', meshes: 1
+-- 'g group_84_ID2026', meshes: 1
+-- 'g group_84_ID2032', meshes: 1
+-- 'g group_85_ID2064', meshes: 1
+-- 'g group_85_ID2070', meshes: 1
+-- 'g group_85_ID2076', meshes: 1
+-- 'g group_85_ID2082', meshes: 1
+-- 'g group_85_ID2088', meshes: 1
+-- 'g group_85_ID2094', meshes: 1
+-- 'g group_85_ID2100', meshes: 1
+-- 'g group_85_ID2106', meshes: 1
+-- 'g group_85_ID2112', meshes: 1
+-- 'g group_85_ID2118', meshes: 1
+-- 'g group_85_ID2124', meshes: 1
+-- 'g group_85_ID2130', meshes: 1
+-- 'g group_85_ID2136', meshes: 1
+-- 'g group_85_ID2142', meshes: 1
+-- 'g group_85_ID2148', meshes: 1
+-- 'g group_85_ID2154', meshes: 1
+-- 'g group_85_ID2160', meshes: 1
+-- 'g group_85_ID2166', meshes: 1
+-- 'g group_85_ID2172', meshes: 1
+-- 'g group_85_ID2178', meshes: 1
+-- 'g group_85_ID2184', meshes: 1
+-- 'g group_85_ID2190', meshes: 1
+-- 'g group_89_ID2468', meshes: 1
+-- 'g group_89_ID2474', meshes: 1
+-- 'g group_90_ID2479', meshes: 1
+-- 'g group_90_ID2474', meshes: 1
+-- 'g group_91', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_92_ID186', meshes: 1
+-- 'g TOYOTA_1', meshes: 1
+-- 'g group_93_ID1164', meshes: 1
+-- 'g group_95_ID2592', meshes: 1
+-- 'g group_95_ID2600', meshes: 1
+-- 'g group_96_ID2607', meshes: 1
+-- 'g group_96_ID2615', meshes: 1
+-- 'g group_95_ID2621', meshes: 1
+-- 'g group_95_ID2600', meshes: 1
+-- 'g group_96_ID2634', meshes: 1
+-- 'g group_96_ID2615', meshes: 1
+-- 'g group_98_ID2647', meshes: 1
+-- 'g _1.8_1', meshes: 1
+-- 'g SLX', meshes: 1
+-- 'g dashboard', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g dashboard_ID2808', meshes: 1
+-- 'g dashboard_ID2814', meshes: 1
+-- 'g dashboard_ID2826', meshes: 1
+-- 'g dashboard_ID3090', meshes: 1
+-- 'g group_100', meshes: 1
+-- 'g group_100_ID2748', meshes: 1
+-- 'g group_101_ID2712', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_102', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_102_ID3121', meshes: 1
+-- 'g group_103', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_103_ID3121', meshes: 1
+-- 'g image_4_ID3220', meshes: 1
+-- 'g group_105_ID3235', meshes: 1
+-- 'g group_105_ID3241', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_105_ID3247', meshes: 1
+-- 'g group_106_ID3252', meshes: 1
+-- 'g group_106_ID3258', meshes: 1
+-- 'g group_106_ID3262', meshes: 1
+-- 'g group_105_ID3268', meshes: 1
+-- 'g group_105_ID3241', meshes: 1
+-- 'defaultobject', meshes: 1
+-- 'g group_105_ID3247', meshes: 1
+-- 'g group_106_ID3283', meshes: 1
+-- 'g group_106_ID3258', meshes: 1
+-- 'g group_106_ID3262', meshes: 1
+<--
+

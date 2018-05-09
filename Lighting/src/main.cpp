@@ -31,10 +31,15 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // lighting
-glm::vec3 lightPos(0.0f, 1.0f, 2.0f);
+glm::vec3 lightPos(-0.7f, 1.0f, 1.0f);
+
+float r, g, b;
 
 int main()
 {
+    r = 1.0f;
+    g = 1.0f;
+    b = 1.0f;
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -158,7 +163,7 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // note that we update the lamp's position attribute's stride to reflect the updated buffer data
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);    
+    glEnableVertexAttribArray(0);
 
     // render loop
     // -----------
@@ -183,9 +188,10 @@ int main()
         ourShader.use();
         // ourShader.setVec3("light.ambient",  0.2f, 0.2f, 0.2f);
         // ourShader.setVec3("light.diffuse",  0.5f, 0.5f, 0.5f); // darken the light a bit to fit the scene
-        // ourShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f); 
-        ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        ourShader.setVec3("lightPos", lightPos);
+        // ourShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+        ourShader.setVec3("lightColor", r, g, b);
+        // cout << r << " " << g << " " << b << endl;
+        ourShader.setVec3("lightPos", camera.getPosition());
         ourShader.setVec3("viewPos", camera.getPosition());
 
 
@@ -210,20 +216,20 @@ int main()
         model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
         model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         ourShader.setMat4("model", model);
-     
+
         ourModel.render(ourShader);
 
         // also draw the lamp object
-        lampShader.use();
-        lampShader.setMat4("projection", projection);
-        lampShader.setMat4("view", view);
-        model = glm::mat4();
-        model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-        lampShader.setMat4("model", model);
-
-        glBindVertexArray(lightVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        // lampShader.use();
+        // lampShader.setMat4("projection", projection);
+        // lampShader.setMat4("view", view);
+        // model = glm::mat4();
+        // model = glm::translate(model, lightPos);
+        // model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+        // lampShader.setMat4("model", model);
+        //
+        // glBindVertexArray(lightVAO);
+        // glDrawArrays(GL_TRIANGLES, 0, 36);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -257,6 +263,20 @@ void processInput(GLFWwindow *window)
         camera.processKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.processKeyboard(RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+        if (r > 0.0f) {
+          r -= 0.001f;
+          g -= 0.001f;
+          b -= 0.001f;
+        }
+      }
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+      if (r < 1.0f) {
+        r += 0.001f;
+        g += 0.001f;
+        b += 0.001f;
+      }
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes

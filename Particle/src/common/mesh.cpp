@@ -95,11 +95,12 @@ unsigned int textureFromFile(const char *path, const string &directory) {
 
   int width, height, num_of_components;
   unsigned char *data = stbi_load(filename.c_str(), &width, &height, &num_of_components, 0);
-
   if (data) {
     GLenum format;
     if (num_of_components == 1) {
       format = GL_RED;
+    } else if (num_of_components == 2) {
+      format = GL_RG;
     } else if (num_of_components == 3) {
       format = GL_RGB;
     } else if (num_of_components == 4) {

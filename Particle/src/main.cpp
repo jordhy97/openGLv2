@@ -82,6 +82,7 @@ int main()
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     // build and compile shaders
     // -------------------------
@@ -170,7 +171,7 @@ int main()
 
 
     Shader smoke("assets/shaders/particle.vs", "assets/shaders/particle.fs");
-    ParticleGenerator smokeGenerator(smoke, "white.png", "assets/", 100);
+    ParticleGenerator smokeGenerator(smoke, "smokeparticle.png", "assets", 1000);
 
 
     // render loop
@@ -215,10 +216,10 @@ int main()
         glm::mat4 view = camera.getViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
-        // lightingShader.setMat4("projection", projection);
-        // lightingShader.setMat4("view", view);
-
-        // render the loaded model
+        // // lightingShader.setMat4("projection", projection);
+        // // lightingShader.setMat4("view", view);
+        //
+        // // render the loaded model
         glm::mat4 model;
         model = glm::translate(model, glm::vec3(-0.4f, -0.1f, 3.17f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
@@ -227,11 +228,22 @@ int main()
 
         ourModel.render(ourShader);
 
+        // Generate 10 new particule each millisecond,
+    		// but limit this to 16 ms (60 fps), or if you have 1 long frame (1sec),
+    		// newparticles will be huge and the next frame even longer.
+    		int newparticles = (int)(deltaTime*10000.0);
+    		if (newparticles > (int)(0.016f*10000.0))
+    			newparticles = (int)(0.016f*10000.0);
+
+        smokeGenerator.update(deltaTime, newparticles, camera.getPosition());
         smoke.use();
         smoke.setMat4("projection", projection);
         smoke.setMat4("view", view);
+
+        smoke.setVec3("CameraRight_worldspace", view[0][0], view[1][0], view[2][0]);
+        smoke.setVec3("CameraUp_worldspace", view[0][1], view[1][1], view[2][1]);
+
         smokeGenerator.render();
-        smokeGenerator.update(0.1f, 10);
         // also draw the lamp object
         // lampShader.use();
         // lampShader.setMat4("projection", projection);

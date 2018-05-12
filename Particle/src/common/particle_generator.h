@@ -33,14 +33,14 @@ public:
   ParticleGenerator(const Shader& shader, const char texture_path[], const string &texture_directory, unsigned int amount);
 
   // Update all particles
-  void update(float dt, unsigned int new_particles, glm::vec3 camera_position, glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f));
+  virtual void update(float dt, unsigned int new_particles, glm::vec3 camera_position, glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f)) = 0;
 
   // Render all particles
   void render();
 
   void sortParticles();
 
-private:
+protected:
   // Initializes buffer and vertex attributes
   void init();
 
@@ -48,7 +48,7 @@ private:
   unsigned int firstUnusedParticle();
 
   // Respawns particle
-  void respawnParticle(Particle &particle, glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f));
+  virtual void respawnParticle(Particle &particle, glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f)) = 0;
 
   // State
   std::vector<Particle> particles_;

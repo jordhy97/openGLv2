@@ -8,7 +8,10 @@
 #include "common/shader.h"
 #include "common/camera.h"
 #include "common/model.h"
-#include "common/particle_generator.h"
+#include "common/smoke_generator.h"
+#include "common/rain_generator.h"
+
+#include <vector>
 
 #include <iostream>
 
@@ -92,7 +95,7 @@ int main()
     // -----------
     Model ourModel("assets/objects/kijang/model.obj");
 
-    // build and compile our shader zprogram
+    // build and compile our shader program
     // ------------------------------------
     Shader lightingShader("assets/shaders/basic_lighting.vs", "assets/shaders/basic_lighting.fs");
     Shader lampShader("assets/shaders/lamp.vs", "assets/shaders/lamp.fs");
@@ -170,9 +173,10 @@ int main()
     glEnableVertexAttribArray(0);
 
 
-    Shader smoke("assets/shaders/particle.vs", "assets/shaders/particle.fs");
-    ParticleGenerator smokeGenerator(smoke, "smokeparticle.png", "assets", 1000);
+    Shader particleShader("assets/shaders/particle.vs", "assets/shaders/particle.fs");
 
+    SmokeGenerator smokeGenerator(particleShader, "smokeparticle.png", "assets", 500);
+    RainGenerator rainGenerator(particleShader, "rainparticle.png", "assets", 10000);
 
     // render loop
     // -----------
@@ -236,14 +240,16 @@ int main()
     			newparticles = (int)(0.016f*10000.0);
 
         smokeGenerator.update(deltaTime, newparticles, camera.getPosition());
-        smoke.use();
-        smoke.setMat4("projection", projection);
-        smoke.setMat4("view", view);
+        rainGenerator.update(deltaTime, newparticles, camera.getPosition());
+        particleShader.use();
+        particleShader.setMat4("projection", projection);
+        particleShader.setMat4("view", view);
 
-        smoke.setVec3("CameraRight_worldspace", view[0][0], view[1][0], view[2][0]);
-        smoke.setVec3("CameraUp_worldspace", view[0][1], view[1][1], view[2][1]);
+        particleShader.setVec3("CameraRight_worldspace", view[0][0], view[1][0], view[2][0]);
+        particleShader.setVec3("CameraUp_worldspace", view[0][1], view[1][1], view[2][1]);
 
         smokeGenerator.render();
+        rainGenerator.render();
         // also draw the lamp object
         // lampShader.use();
         // lampShader.setMat4("projection", projection);

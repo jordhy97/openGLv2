@@ -14,71 +14,13 @@ ParticleGenerator::ParticleGenerator(const Shader& shader, const char texture_pa
     init();
 }
 
-// Update all particles
-void ParticleGenerator::update(float dt, unsigned int new_particles, glm::vec3 camera_position, glm::vec3 offset) {
-  // Add new particles
-  for (unsigned int i = 0; i < new_particles; i++) {
-    int unused_particle = firstUnusedParticle();
-    respawnParticle(particles_[unused_particle], offset);
-  }
-
-  // Update all particles
-  particles_count_ = 0;
-  for (unsigned int i = 0; i < amount_; i++) {
-    Particle &p = particles_[i];
-    if (p.life > 0.0f) {
-      p.life -= dt; // reduce life
-      p.color.a -= (dt * 100);
-      if (p.life > 0.0f) {	// particle is alive, thus update
-        // p.position -= p.velocity * dt;
-        // p.color.a -= dt * 2.5;
-
-
-        // Simulate simple physics : gravity only, no collisions
-        // p.velocity += glm::vec3(0.0f,-9.81f, 0.0f) * dt * 0.5f;
-        p.position += p.velocity * dt;
-
-        // wind effect
-        p.position.x += -(rand() % 3)/8.0f * dt;
-        p.position.y += -(rand() % 5 - 2)/8.0f * dt;
-        p.position.z += -(rand() % 7 - 2)/8.0f * dt;
-
-        p.cameradistance = glm::length2(p.position - camera_position);
-
-        //ParticlesContainer[i].pos += glm::vec3(0.0f,10.0f, 0.0f) * (float)delta;
-
-        // Fill the GPU buffer
-        g_particle_position_size_data_[4*particles_count_+0] = p.position.x;
-        g_particle_position_size_data_[4*particles_count_+1] = p.position.y;
-        g_particle_position_size_data_[4*particles_count_+2] = p.position.z;
-
-        g_particle_position_size_data_[4*particles_count_+3] = p.size;
-
-        g_particle_color_data_[4*particles_count_+0] = p.color.r;
-        g_particle_color_data_[4*particles_count_+1] = p.color.g;
-        g_particle_color_data_[4*particles_count_+2] = p.color.b;
-        g_particle_color_data_[4*particles_count_+3] = p.color.a;
-      } else {
-        // Particles that just died will be put at the end of the buffer in SortParticles();
-  			p.cameradistance = -1.0f;
-      }
-      particles_count_++;
-    }
-  }
-
-  sortParticles();
-}
-
 // Render all particles
 void ParticleGenerator::render() {
-  // Use additive blending to give it a 'glow' effect
   glBindVertexArray(VAO_);
   glBindBuffer(GL_ARRAY_BUFFER, particles_position_buffer_);
-  // glBufferData(GL_ARRAY_BUFFER, amount_ * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, particles_count_ * sizeof(GLfloat) * 4, &g_particle_position_size_data_[0]);
 
 	glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer_);
-  // glBufferData(GL_ARRAY_BUFFER, amount_ * 4 * sizeof(GLubyte), NULL, GL_STREAM_DRAW);
   glBufferSubData(GL_ARRAY_BUFFER, 0, particles_count_ * sizeof(GLubyte) * 4, &g_particle_color_data_[0]);
 
   glEnable(GL_BLEND);
@@ -87,8 +29,6 @@ void ParticleGenerator::render() {
   glBindTexture(GL_TEXTURE_2D, texture_.id);
   glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particles_count_);
   glBindVertexArray(0);
-
-  // Don't forget to reset to default blending mode
 }
 
 void ParticleGenerator::sortParticles() {
@@ -200,45 +140,4 @@ unsigned int ParticleGenerator::firstUnusedParticle() {
     // All particles are taken, override the first one (note that if it repeatedly hits this case, more particles should be reserved)
     last_used_particle_ = 0;
     return last_used_particle_;
-}
-
-// Respawns particle
-void ParticleGenerator::respawnParticle(Particle &particle, glm::vec3 offset) {
-  // GLfloat random = ((rand() % 11) - 10) / 10000.0f;
-  // particle.position = random + offset;
-  // particle.color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-  // //  particle.Life = 1.0f;
-  // //  particle.Velocity = object.Velocity * 0.1f;
-  // // particle.position = glm::vec3(0.0f, 0.0f, 0.0f);
-  // // particle.color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-  // particle.velocity.y = (rand() % 100001 - 50000) / 100000.0f;
-  // particle.velocity.x = rand() % 100001 / 100000.0f;
-  // particle.velocity.z = (rand() % 100001 - 50000) / 100000.0f;
-  //
-  // particle.life = 1.0f;
-
-  particle.life = 1.0f; // This particle will live 5 seconds.
-	particle.position = glm::vec3(-0.244f, -0.065f, 2.48f);
-
-	float spread = 1.5f;
-	glm::vec3 maindir = glm::vec3(0.0f, 10.0f, 0.0f);
-	// Very bad way to generate a random direction;
-	// See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
-	// combined with some user-controlled parameters (main direction, spread, etc)
-	glm::vec3 randomdir = glm::vec3(
-		(rand()%2000 - 1000.0f)/1000.0f,
-		(rand()%2000 - 1000.0f)/1000.0f,
-		(rand()%2000 - 1000.0f)/1000.0f
-	);
-
-	particle.velocity = glm::vec3(0.0f, 0.02f, 0.0f);
-
-
-	// Very bad way to generate a random color
-  int color = 200 + rand() % 56;
-	particle.color.r = color;
-	particle.color.g = color;
-	particle.color.b = color;
-	particle.color.a = 255;
-	particle.size =  0.025f;
 }

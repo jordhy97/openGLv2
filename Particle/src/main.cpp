@@ -176,10 +176,12 @@ int main()
     Shader particleShader("assets/shaders/particle.vs", "assets/shaders/particle.fs");
 
     SmokeGenerator smokeGenerator(particleShader, "smokeparticle.png", "assets", 500);
-    RainGenerator rainGenerator(particleShader, "rainparticle.png", "assets", 10000);
+    RainGenerator rainGenerator(particleShader, "rainparticle.png", "assets", 30000);
 
     // render loop
     // -----------
+    double lastTime = glfwGetTime();
+    int nbFrames = 0;
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -187,6 +189,17 @@ int main()
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
+
+        nbFrames++;
+        //print fps
+        if ( currentFrame - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
+          // print and reset timer
+          std::cout << 1000.0f/double(nbFrames) << " ms/frame" << std::endl;
+          std:: cout << "FPS: " << nbFrames << std::endl;
+          nbFrames = 0;
+          lastTime += 1.0;
+        }
+
 
         // input
         // -----

@@ -29,7 +29,7 @@ void SmokeGenerator::update(float dt, unsigned int new_particles, glm::vec3 came
 
         // wind effect
         p.position.x += -(rand() % 3)/8.0f * dt;
-        p.position.y += -(rand() % 5 - 2)/8.0f * dt;
+        p.position.y += -(rand() % 5 - 2)/16.0f * dt;
         p.position.z += -(rand() % 7 - 2)/8.0f * dt;
 
         p.cameradistance = glm::length2(p.position - camera_position);

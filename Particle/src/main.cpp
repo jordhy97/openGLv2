@@ -221,7 +221,7 @@ int main()
         model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
         model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         ourShader.setMat4("model", model);
-
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);  
         ourModel.render(ourShader);
 
         // Generate 10 new particule each millisecond,

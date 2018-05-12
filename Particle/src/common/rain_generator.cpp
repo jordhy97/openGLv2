@@ -34,19 +34,26 @@ void RainGenerator::update(float dt, unsigned int new_particles, glm::vec3 camer
         p.position.y += -(rand() % 3 - 2)/10.0f * dt;
         p.position.z += -(rand() % 3 - 2)/10.0f * dt;
 
-        p.cameradistance = glm::length2(p.position - camera_position);
+        // collision check
+        if (p.position.x > -0.25f && p.position.x < 0.15f && p.position.y > -0.065f && p.position.y < 0.065f && p.position.z > 2.425f && p.position.z < 2.805f) {
+          p.life = 0;
+          p.cameradistance = -1.0f;
+        } else {
+          p.cameradistance = glm::length2(p.position - camera_position);
 
-        // Fill the GPU buffer
-        g_particle_position_size_data_[4*particles_count_+0] = p.position.x;
-        g_particle_position_size_data_[4*particles_count_+1] = p.position.y;
-        g_particle_position_size_data_[4*particles_count_+2] = p.position.z;
+          // Fill the GPU buffer
+          g_particle_position_size_data_[4*particles_count_+0] = p.position.x;
+          g_particle_position_size_data_[4*particles_count_+1] = p.position.y;
+          g_particle_position_size_data_[4*particles_count_+2] = p.position.z;
 
-        g_particle_position_size_data_[4*particles_count_+3] = p.size;
+          g_particle_position_size_data_[4*particles_count_+3] = p.size;
 
-        g_particle_color_data_[4*particles_count_+0] = p.color.r;
-        g_particle_color_data_[4*particles_count_+1] = p.color.g;
-        g_particle_color_data_[4*particles_count_+2] = p.color.b;
-        g_particle_color_data_[4*particles_count_+3] = p.color.a;
+          g_particle_color_data_[4*particles_count_+0] = p.color.r;
+          g_particle_color_data_[4*particles_count_+1] = p.color.g;
+          g_particle_color_data_[4*particles_count_+2] = p.color.b;
+          g_particle_color_data_[4*particles_count_+3] = p.color.a;
+        }
+
       } else {
         // Particles that just died will be put at the end of the buffer in SortParticles();
   			p.cameradistance = -1.0f;
